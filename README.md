@@ -26,6 +26,49 @@ despesa DECIMAL (10,2) NOT NULL,
 lucro   DECIMAL (10,2) NOT NULL,  
 data_dia DATE
 
+# BIBLIOTECA
+
+CREATE DATABASE biblioteca;
+USE biblioteca;
+
+CREATE TABLE livro
+(
+id_l INT AUTO_INCREMENT PRIMARY KEY,
+livro_id VARCHAR(100)
+);
+
+
+CREATE TABLE autor
+(
+id_a INT AUTO_INCREMENT PRIMARY KEY,
+autor_id VARCHAR(100)
+);
+
+INSERT INTO livro (livro_id) VALUES
+('Assasinato no expresso oriente'),
+('Harry potter e a pedra filosofal'),
+('Senhor dos aneis');
+
+INSERT INTO autor (autor_id) VALUES
+('Agatha Christie'),
+('J.K.Rolling'),
+('Tolkien');
+
+CREATE TABLE biblioteca
+(
+id INT AUTO_INCREMENT PRIMARY KEY,
+autor_id INT,
+livro_id INT,
+data_m DATE,
+FOREIGN KEY (autor_id) REFERENCES autor(autor_id),
+FOREIGN KEY (livro_id) REFERENCES livro(livro_id)
+);
+
+INSERT INTO biblioteca (autor_id, livro_id) VALUES
+('1', '1'),
+('2', '2');
+
+
 ); 
 INSERT INTO lucro(receita, despesa, lucro, data_dia) VALUES 
 ('1000000.00', '25000.00', '750000.00' , '2012-01-06') ;
