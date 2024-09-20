@@ -75,4 +75,54 @@ INSERT INTO lucro(receita, despesa, lucro, data_dia) VALUES
 
 SELECT * FROM  lucro;
 
+# COISA QUE EU COPIEI
 
+CREATE DATABASE escola;
+USE escola;
+
+
+CREATE TABLE pessoa 
+(
+id_pessoa INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(100)
+);
+
+CREATE TABLE professor 
+(
+id_professor INT AUTO_INCREMENT PRIMARY KEY,
+id_pessoa INT,
+FOREIGN KEY (id_pessoa) REFERENCES pessoa(id_pessoa)
+);
+
+CREATE TABLE aluno 
+(
+id_aluno INT AUTO_INCREMENT PRIMARY KEY,
+id_pessoa INT,
+FOREIGN KEY (id_pessoa) REFERENCES pessoa(id_pessoa)
+);
+
+INSERT INTO pessoa (nome) VALUES
+('pedro lopes'),
+('paulo');
+
+INSERT INTO aluno (id_pessoa) VALUES
+(NULL),
+(2);
+INSERT INTO professor (id_pessoa) VALUES
+(1),
+(NULL);
+
+SELECT 
+    p.id_pessoa,
+    p.nome,
+    CASE
+        WHEN pr.id_pessoa IS NOT NULL THEN 'Professor'
+        WHEN al.id_pessoa IS NOT NULL THEN 'aluno'
+        ELSE 'Neither'
+    END AS role
+FROM 
+    pessoa p
+LEFT JOIN 
+    professor pr ON p.id_pessoa = pr.id_pessoa
+LEFT JOIN 
+    aluno al ON p.id_pessoa = al.id_pessoa;
